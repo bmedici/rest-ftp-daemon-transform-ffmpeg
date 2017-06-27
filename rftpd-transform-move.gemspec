@@ -2,15 +2,15 @@
 Gem::Specification.new do |spec|
 
   # Project version
-  spec.version                    = "0.0.1"
+  spec.version                    = "0.0.2"
 
   # Project description
-  spec.name                       = "rest-ftp-daemon-transform-move"
+  spec.name                       = "rftpd-transform-move"
   spec.authors                    = ["Bruno MEDICI"]
   spec.email                      = "rftpd-project@bmconseil.com"
   spec.description                = "rest-ftp-daemon transforms plugin: move"
   spec.summary                    = "rest-ftp-daemon transforms plugin: move"
-  spec.homepage                   = "http://github.com/bmedici/rest-ftp-daemon-transform-move"
+  spec.homepage                   = "http://github.com/bmedici/rftpd-transform-move"
   spec.licenses                   = ["MIT"]
   spec.date                       = Time.now.strftime("%Y-%m-%d")
 
