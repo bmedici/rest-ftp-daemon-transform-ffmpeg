@@ -2,7 +2,7 @@
 Gem::Specification.new do |spec|
 
   # Project version
-  spec.version                    = "0.0.2"
+  spec.version                    = "0.0.3"
 
   # Project description
   spec.name                       = "rftpd-transform-move"
@@ -30,6 +30,6 @@ Gem::Specification.new do |spec|
   # spec.add_development_dependency "ruby-prof"
 
   # Runtime dependencies
-  spec.add_runtime_dependency     "rest-ftp-daemon"#, "~> 0.10.3"
+  # spec.add_runtime_dependency     "rest-ftp-daemon"#, "~> 0.10.3"
 
 end
