@@ -2,15 +2,15 @@
 Gem::Specification.new do |spec|
 
   # Project version
-  spec.version                    = "0.0.3"
+  spec.version                    = "0.0.4"
 
   # Project description
-  spec.name                       = "rftpd-transform-move"
+  spec.name                       = "rest-ftp-daemon-transform-ffmpeg"
   spec.authors                    = ["Bruno MEDICI"]
   spec.email                      = "rftpd-project@bmconseil.com"
-  spec.description                = "rest-ftp-daemon transforms plugin: move"
-  spec.summary                    = "rest-ftp-daemon transforms plugin: move"
-  spec.homepage                   = "http://github.com/bmedici/rftpd-transform-move"
+  spec.description                = "rest-ftp-daemon plugin: ffmpeg"
+  spec.summary                    = "rest-ftp-daemon plugin: transform files with FFMPEG"
+  spec.homepage                   = "http://github.com/bmedici/#{spec.name}"
   spec.licenses                   = ["MIT"]
   spec.date                       = Time.now.strftime("%Y-%m-%d")
 
@@ -20,16 +20,10 @@ Gem::Specification.new do |spec|
   spec.require_paths              = ["lib"]
   spec.required_ruby_version      = ">= 2.3"
 
+  # Runtime dependencies
+  spec.add_runtime_dependency     "streamio-ffmpeg"
+
   # Development dependencies
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
-  # spec.add_development_dependency "rspec"
-  # spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "pry"
-  # spec.add_development_dependency "http"
-  # spec.add_development_dependency "ruby-prof"
-
-  # Runtime dependencies
-  # spec.add_runtime_dependency     "rest-ftp-daemon"#, "~> 0.10.3"
-
 end
