@@ -1,7 +1,7 @@
 require 'streamio-ffmpeg'
 
 module RestFtpDaemon::Transform
-  class Ffmpeg < Base
+  class TransformFfmpeg < TransformBase
 
     # Task attributes
     def task_icon
