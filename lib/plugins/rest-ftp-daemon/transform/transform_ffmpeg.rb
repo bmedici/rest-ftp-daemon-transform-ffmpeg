@@ -1,7 +1,7 @@
 require 'streamio-ffmpeg'
 
 module RestFtpDaemon::Transform
-  class Ffmpeg < Base
+  class TransformFfmpeg < TaskTransform
 
     # Task attributes
     def task_icon
@@ -26,7 +26,7 @@ module RestFtpDaemon::Transform
 
       # FIXME: only one source, otherwise  we don't know how to determine target name
       if @input.count>1
-        raise RestFtpDaemon::SourceShouldBeUnique, "prepare: only one source can be matched for transformation"
+        raise Task::SourceShouldBeUnique, "prepare: only one source can be matched for transformation"
       end
     end
 
@@ -104,7 +104,7 @@ module RestFtpDaemon::Transform
       raise StandardError unless path && File.exist?(path)
 
     rescue StandardError, Errno::ENOENT => exception
-      raise RestFtpDaemon::Transform::ErrorMissingBinary, "missing ffmpeg binary: #{method}"
+      raise Task::TransformMissingBinary, "missing ffmpeg binary: #{method}"
     end
 
   end
