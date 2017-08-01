@@ -10,11 +10,16 @@ module RestFtpDaemon::Transform
 
     # Task operations
     def prepare stash
+      # Init
       super
+      @command = @config[:command]
+
+      # Ensure command is available
+      raise Task::TransformMissingBinary, "mp4split binary not defined" unless @command
 
       # Import command path
-      FFMPEG.ffmpeg_binary = @config[:ffmpeg]
-      FFMPEG.ffprobe_binary = File.join(File.dirname(@config[:ffmpeg]), "ffprobe")
+      FFMPEG.ffmpeg_binary = @config[:command]
+      FFMPEG.ffprobe_binary = File.join(File.dirname(@config[:command]), "ffprobe")
       log_debug "FFMPEG binaries", {
         ffmpeg_binary: FFMPEG.ffmpeg_binary,
         ffprobe_binary: FFMPEG.ffprobe_binary,
