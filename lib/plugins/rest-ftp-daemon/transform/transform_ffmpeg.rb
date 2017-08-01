@@ -9,7 +9,7 @@ module RestFtpDaemon::Transform
     end
 
     # Task operations
-    def prepare
+    def prepare stash
       super
 
       # Import command path
@@ -25,18 +25,18 @@ module RestFtpDaemon::Transform
       ffmpeg_check_binary :ffmpeg_binary
 
       # FIXME: only one source, otherwise  we don't know how to determine target name
-      if @input.count>1
+      if stash.count>1
         raise RestFtpDaemon::SourceShouldBeUnique, "prepare: only one source can be matched for transformation"
       end
     end
 
-    def process
-      transform_each_input
+    def process stash
+      transform_each_input stash
     end
 
   protected
 
-    def transform input, output
+    def transform name, input, output
       # Read info about source file
       set_info INFO_CURRENT, output.name
       begin
