@@ -2,6 +2,8 @@ require 'streamio-ffmpeg'
 
 module RestFtpDaemon::Transform
   class TransformFfmpeg < TransformBase
+    FFMPEG_THREADS      = 2
+    FFMPEG_ATTRIBUTES   = [:video_codec, :video_bitrate, :video_bitrate_tolerance, :frame_rate, :resolution, :aspect, :keyframe_interval, :x264_vprofile, :x264_preset, :audio_codec, :audio_bitrate, :audio_sample_rate, :audio_channels]
 
     # Task attributes
     def task_icon
@@ -43,7 +45,6 @@ module RestFtpDaemon::Transform
 
     def transform name, input, output
       # Read info about source file
-      set_info INFO_CURRENT, output.name
       begin
         movie = FFMPEG::Movie.new(input.path_abs)
       rescue Errno::ENOENT => exception
@@ -59,16 +60,16 @@ module RestFtpDaemon::Transform
 
       # Build options
       ffmpeg_options = {}
-      JOB_FFMPEG_ATTRIBUTES.each do |name|
+      FFMPEG_ATTRIBUTES.each do |name|
         # Skip if no value
         key = name.to_s
         next if @options[key].nil?
 
-        # Grab this optin and value frop @options
+        # Grab this option and value frop @options
         ffmpeg_options[key]     = @options.delete(name)
       end
       ffmpeg_options[:custom]   = ffmpeg_options_from(@options[:custom])
-      ffmpeg_options[:threads]  = JOB_FFMPEG_THREADS
+      ffmpeg_options[:threads]  = FFMPEG_THREADS
       set_info :ffmpeg_options, ffmpeg_options
 
       # Build transcoder options
@@ -109,7 +110,7 @@ module RestFtpDaemon::Transform
       raise StandardError unless path && File.exist?(path)
 
     rescue StandardError, Errno::ENOENT => exception
-      raise RestFtpDaemon::Transform::ErrorMissingBinary, "missing ffmpeg binary: #{method}"
+      raise Transform::TransformMissingBinary, "missing ffmpeg binary: #{method}"
     end
 
   end
